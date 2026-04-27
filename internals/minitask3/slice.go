@@ -11,6 +11,8 @@ func AddNumber(n int) int {
 	allSlice = append(allSlice, newSlice...)
 	allSlice = append(allSlice, n)
 	allSlice = append(allSlice, endSlice...)
-	fmt.Println(allSlice)
+	for _, value := range allSlice {
+		fmt.Println(value)
+	}
 	return n
 }
