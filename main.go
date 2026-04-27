@@ -6,11 +6,14 @@ import (
 )
 
 func main() {
-	fmt.Println(luas(math.Pi, 5))
+	fmt.Println(luas(5))
+	fmt.Println(keliling(5))
 }
 
-func luas(pi float64, r float64) float64 {
-	return pi * r * r
+func luas(r float64) float64 {
+	return math.Pi * r * r
 }
 
-func keliling()
+func keliling(r float64) float64 {
+	return 2 * math.Pi * r
+}
