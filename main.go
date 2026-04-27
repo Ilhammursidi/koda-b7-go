@@ -2,89 +2,104 @@ package main
 
 import (
 	"fmt"
-	"math"
+
+	"github.com/ilhammursidi/koda-b7-go/internals/minitask1"
+	"github.com/ilhammursidi/koda-b7-go/internals/minitask2"
+	"github.com/ilhammursidi/koda-b7-go/internals/minitask3"
+	"github.com/ilhammursidi/koda-b7-go/internals/minitask4"
 )
 
 func main() {
-	// minitask 1
-	fmt.Println(luas(5))
-	fmt.Println(keliling(5))
+	for {
+		fmt.Println("===============MENU================")
+		fmt.Println("1. Luas dan Keliling Lingkaran")
+		fmt.Println("2. Segigita")
+		fmt.Println("3. Append Slice")
+		fmt.Println("4. User")
+		fmt.Println("0. Keluar")
+		fmt.Println("===================================")
 
-	fmt.Println(luasDanKeliling(5))
+		var s uint
+		fmt.Print("Pilih : ")
+		fmt.Scan(&s)
+		if s != 1 && s != 2 && s != 3 && s != 4 && s != 0 {
+			fmt.Println("Input Tidak Sesuai")
+			return
+		} else if s == 1 {
+			var o int
+			fmt.Println("==========MENU==========")
+			fmt.Println("1. Hitung Luas lingkaran")
+			fmt.Println("2. Hitung Lingkaran")
+			fmt.Println("3. Hitung Luas dan Keliling Lingkaran")
+			fmt.Println("0. Kembali")
+			fmt.Print("Pilih Opsi:")
+			fmt.Scan(&o)
+			if o == 1 {
+				// minitask 1
+				var t float32
+				fmt.Print("Input angka untuk Luas lingkaran: ")
+				fmt.Scan(&t)
+				luas := minitask1.Luas(t)
+				fmt.Printf("Luas lingkaran = %.2f\n", luas)
+				fmt.Println("===================================")
+			} else if o == 2 {
+				var x float32
+				fmt.Print("Input angka untuk Keliling lingkaran: ")
+				fmt.Scan(&x)
+				keliling := minitask1.Keliling(x)
+				fmt.Printf("Keliling = %.2f\n", keliling)
+				fmt.Println("===================================")
 
-	// minitask 2
-	var n int
-	fmt.Print("Input angka : ")
-	fmt.Scan(&n)
-	triangle(n)
+			} else if o == 3 {
 
-	// minitask 3
-	slice := []int{50, 75, 66, 20, 32, 90}
-	var newSlice []int = slice[:3]
-	var endSlice []int = slice[3:]
+				var j float32
+				fmt.Print("Input angka untuk Luas dan Keliling lingkaran: ")
+				fmt.Scan(&j)
+				luasLingkaran, kelilingLingkaran := minitask1.LuasDanKeliling(j)
+				fmt.Printf("Luas %.2f, keliling %.2f\n", luasLingkaran, kelilingLingkaran)
+				fmt.Println("===================================")
 
-	var allSlice []int = make([]int, 0, 7)
-	allSlice = append(allSlice, newSlice...)
-	allSlice = append(allSlice, 88)
-	allSlice = append(allSlice, endSlice...)
-	fmt.Println(slice)
-	fmt.Println(newSlice)
-	fmt.Println(endSlice)
-	fmt.Println(allSlice)
+			} else if o == 0 {
+				return
+			} else if o != 0 && o != 1 && o != 2 && o != 3 && o != 4 {
+				fmt.Println("Invalid Input")
+				return
+			}
 
-	// minitask 4
-	ilham := user{
-		// id:        1,
-		name:      "Ilham Mursidi",
-		image:     "",
-		email:     "imursidi37@gmail.com",
-		umur:      26,
-		phone:     "082189971471",
-		isMarried: false,
-		education: education{name: "SMKN 1 Minasatene", major: "Teknik Komputer dan Jaringan"},
-	}
+		} else if s == 2 {
+			// minitask 2
+			var n int
+			fmt.Print("Input angka : ")
+			fmt.Scan(&n)
+			minitask2.Triangle(n)
+			fmt.Println("===================================")
 
-	fmt.Println(ilham.education)
-	fmt.Println(ilham)
-}
+		} else if s == 3 {
+			// minitask 3
+			var p int
+			fmt.Print("Input untuk slice : ")
+			fmt.Scan(&p)
+			minitask3.AddNumber(p)
+			fmt.Println("===================================")
 
-type user struct {
-	// id        int
-	name      string
-	image     string
-	email     string
-	umur      int
-	phone     string
-	isMarried bool
-	education education
-}
-
-type education struct {
-	name  string
-	major string
-}
-
-func luas(r float64) float64 {
-	return math.Pi * r * r
-}
-
-func keliling(r float64) float64 {
-	return 2 * math.Pi * r
-}
-
-func luasDanKeliling(r float64) (luas float64, keliling float64) {
-	luas = math.Pi * r * r
-	keliling = 2 * math.Pi * r
-	return luas, keliling
-}
-
-func triangle(n int) int {
-
-	for i := 0; i <= n; i++ {
-		for j := 1; j <= i; j++ {
-			fmt.Print("*")
+		} else if s == 4 {
+			// minitask 4
+			ilham := minitask4.User{
+				// id:        1,
+				Name:      "Ilham Mursidi",
+				Image:     "alim",
+				Email:     "imursidi37@gmail.com",
+				Umur:      26,
+				Phone:     "082189971471",
+				IsMarried: false,
+				Education: minitask4.Education{Name: "SMKN 1 Minasatene", Major: "Teknik Komputer dan Jaringan"},
+			}
+			fmt.Println(ilham)
+		} else if s == 0 {
+			fmt.Println("Terima Kasih")
+			return
 		}
-		fmt.Println()
+
 	}
-	return n
+
 }
