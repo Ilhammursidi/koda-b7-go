@@ -8,6 +8,8 @@ import (
 	"github.com/ilhammursidi/koda-b7-go/internals/minitask3"
 	"github.com/ilhammursidi/koda-b7-go/internals/minitask4"
 	"github.com/ilhammursidi/koda-b7-go/internals/minitask6"
+	"github.com/ilhammursidi/koda-b7-go/internals/minitask7"
+	"github.com/ilhammursidi/koda-b7-go/internals/minitask8"
 )
 
 func main() {
@@ -18,13 +20,15 @@ func main() {
 		fmt.Println("3. Append Slice")
 		fmt.Println("4. User")
 		fmt.Println("5. Open and Read File")
+		fmt.Println("6. Struct Person")
+		fmt.Println("7. Pembayaran")
 		fmt.Println("0. Keluar")
 		fmt.Println("===================================")
 
 		var s uint
 		fmt.Print("Pilih : ")
 		fmt.Scan(&s)
-		if s != 1 && s != 2 && s != 3 && s != 4 && s != 5 && s != 0 {
+		if s != 1 && s != 2 && s != 3 && s != 4 && s != 5 && s != 6 && s != 7 && s != 0 {
 			fmt.Println("Input Tidak Sesuai")
 			return
 		} else if s == 1 {
@@ -63,9 +67,8 @@ func main() {
 
 			} else if o == 0 {
 				return
-			} else if o != 0 && o != 1 && o != 2 && o != 3 && o != 4 {
+			} else if o != 0 && o != 1 && o != 2 && o != 3 {
 				fmt.Println("Invalid Input")
-				return
 			}
 
 		} else if s == 2 {
@@ -102,10 +105,46 @@ func main() {
 			fmt.Print("Ketik file path: ")
 			fmt.Scan(&input)
 			minitask6.OpenFile(input)
+
+		} else if s == 6 {
+			ilham := minitask7.NewUser("ilham", "bogor", "0888")
+
+			ilham.Cetak()
+			ilham.Greet(ilham.Name)
+			ilham.SetName("apa")
+			ilham.Greet(ilham.Name)
+
+		} else if s == 7 {
+			bank := &minitask8.Bank{BankName: "BCA"}
+			online := &minitask8.Online{EbankName: "Dana"}
+			fiktif := &minitask8.FictivePayment{}
+
+			prices := []int{15000, 20000, 75000}
+
+			fmt.Println("via Bank")
+			minitask8.MethodPay(bank, prices)
+			fmt.Println()
+
+			fmt.Println("via Online")
+			minitask8.MethodPay(online, prices)
+			fmt.Println()
+
+			fiktifPrices := []int{30000, -50000, 120000, 0, 80000}
+
+			fmt.Println("Pembayaran Fiktiv")
+			for _, price := range fiktifPrices {
+				err := fiktif.Pay(price)
+				if err != nil {
+					fmt.Printf("[ERROR] Gagal menyimpan pembayaran %d: %v\n", price, err)
+				}
+			}
+
+			fmt.Println()
+			fmt.Println("Data Pembayaran Fiktif")
+			fmt.Println(fiktif.GetRecords())
 		} else if s == 0 {
 			fmt.Println("Terima Kasih")
 			return
-
 		}
 
 	}
