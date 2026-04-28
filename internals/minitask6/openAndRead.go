@@ -7,9 +7,16 @@ import (
 )
 
 func OpenFile(path string) {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("PANIC: ", path, r)
+			fmt.Println("continue..")
+		}
+	}()
+
 	file, err := os.Open(path)
 	if err != nil {
-		panic("gagal menemukan file")
+		fmt.Println("gagal menemukan file", err)
 	}
 
 	defer file.Close()
