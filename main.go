@@ -7,6 +7,7 @@ import (
 	"github.com/ilhammursidi/koda-b7-go/internals/minitask2"
 	"github.com/ilhammursidi/koda-b7-go/internals/minitask3"
 	"github.com/ilhammursidi/koda-b7-go/internals/minitask4"
+	"github.com/ilhammursidi/koda-b7-go/internals/minitask6"
 )
 
 func main() {
@@ -16,13 +17,14 @@ func main() {
 		fmt.Println("2. Segigita")
 		fmt.Println("3. Append Slice")
 		fmt.Println("4. User")
+		fmt.Println("5. Open and Read File")
 		fmt.Println("0. Keluar")
 		fmt.Println("===================================")
 
 		var s uint
 		fmt.Print("Pilih : ")
 		fmt.Scan(&s)
-		if s != 1 && s != 2 && s != 3 && s != 4 && s != 0 {
+		if s != 1 && s != 2 && s != 3 && s != 4 && s != 5 && s != 0 {
 			fmt.Println("Input Tidak Sesuai")
 			return
 		} else if s == 1 {
@@ -95,11 +97,16 @@ func main() {
 				Education: minitask4.Education{Name: "SMKN 1 Minasatene", Major: "Teknik Komputer dan Jaringan"},
 			}
 			fmt.Println(ilham)
+		} else if s == 5 {
+			var input string
+			fmt.Print("Ketik file path: ")
+			fmt.Scan(&input)
+			minitask6.OpenFile(input)
 		} else if s == 0 {
 			fmt.Println("Terima Kasih")
 			return
+
 		}
 
 	}
-
 }
