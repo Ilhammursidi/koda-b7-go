@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"sync"
 
+	"github.com/ilhammursidi/koda-b7-go/internals/goroutine"
 	"github.com/ilhammursidi/koda-b7-go/internals/minitask1"
 	"github.com/ilhammursidi/koda-b7-go/internals/minitask2"
 	"github.com/ilhammursidi/koda-b7-go/internals/minitask3"
@@ -22,13 +24,17 @@ func main() {
 		fmt.Println("5. Open and Read File")
 		fmt.Println("6. Struct Person")
 		fmt.Println("7. Pembayaran")
+		fmt.Println("8. CoffeShop")
+		fmt.Println("9. Bangun Pagi")
+		fmt.Println("10. Papan Tulis")
+		fmt.Println("11. KuadratLoop")
 		fmt.Println("0. Keluar")
 		fmt.Println("===================================")
 
 		var s uint
 		fmt.Print("Pilih : ")
 		fmt.Scan(&s)
-		if s != 1 && s != 2 && s != 3 && s != 4 && s != 5 && s != 6 && s != 7 && s != 0 {
+		if s != 1 && s != 2 && s != 3 && s != 4 && s != 5 && s != 6 && s != 7 && s != 8 && s != 9 && s != 10 && s != 11 && s != 0 {
 			fmt.Println("Input Tidak Sesuai")
 			return
 		} else if s == 1 {
@@ -78,7 +84,7 @@ func main() {
 			fmt.Scan(&n)
 			minitask2.Triangle(n)
 			fmt.Println("===================================")
-
+			goroutine.BangunPagi()
 		} else if s == 3 {
 			// minitask 3
 			var p int
@@ -142,8 +148,49 @@ func main() {
 			fmt.Println()
 			fmt.Println("Data Pembayaran Fiktif")
 			fmt.Println(fiktif.GetRecords())
+
+		} else if s == 8 {
+			goroutine.CoffeShop()
+			fmt.Println("===================================")
+
+		} else if s == 9 {
+			goroutine.BangunPagi()
+			fmt.Println("===================================")
+
+		} else if s == 10 {
+			board := make(chan string)
+			var wg sync.WaitGroup
+			messages := []struct {
+				name    string
+				message string
+			}{
+				{"Ayah", "Jangan lupa beli sayur"},
+				{"Ibu", "Siapkan PR anak"},
+				{"Adik", "Aku mau main game"},
+				{"Kakak", "Nonton film malam ini"},
+			}
+			go goroutine.WhiteBoard(board)
+			for _, m := range messages {
+				wg.Add(1)
+				go goroutine.Sender(board, &wg, m.name, m.message)
+			}
+			wg.Wait()
+			close(board)
+		} else if s == 11 {
+			var n int
+			fmt.Print("Input Angka :")
+			fmt.Scan(&n)
+			N := goroutine.GetNumber(n)
+			Genap := goroutine.Genap(N)
+			Hasil := goroutine.Kuadrat(Genap)
+			for result := range Hasil {
+				fmt.Println(result)
+			}
+
 		} else if s == 0 {
 			fmt.Println("Terima Kasih")
+			fmt.Println("===================================")
+
 			return
 		}
 
