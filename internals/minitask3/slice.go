@@ -8,9 +8,9 @@ func AddNumber(n int) int {
 	var endSlice []int = slice[3:]
 
 	var allSlice []int = make([]int, 0, 7)
-	allSlice = append(allSlice, newSlice...)
-	allSlice = append(allSlice, n)
-	allSlice = append(allSlice, endSlice...)
+	// allSlice = append(allSlice, newSlice...)
+	allSlice = append(append(append(allSlice, newSlice...), n), endSlice...)
+	// allSlice = append(allSlice, endSlice...)
 	for _, value := range allSlice {
 		fmt.Println(value)
 	}
