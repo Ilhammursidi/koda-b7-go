@@ -3,7 +3,7 @@ package goroutine
 func GetNumber(n int) <-chan int {
 	numChan := make(chan int)
 	go func() {
-		for i := range n {
+		for i := 1; i < n+1; i++ {
 			numChan <- i
 		}
 		close(numChan)
